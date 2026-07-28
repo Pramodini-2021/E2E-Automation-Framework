@@ -1,5 +1,6 @@
 package org.example.base;
 
+import org.example.utils.ConfigReader;
 import org.example.utils.DriverFactory;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
@@ -11,8 +12,8 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp() {
-        driver = DriverFactory.initDriver("chrome");
-        driver.get("https://www.saucedemo.com");
+        driver = DriverFactory.initDriver(ConfigReader.get("browser"));
+        driver.get(ConfigReader.get("url"));
     }
 
     @AfterMethod
