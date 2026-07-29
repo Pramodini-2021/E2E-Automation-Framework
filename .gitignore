@@ -37,3 +37,6 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+### This folder include report of every Output and SS of failuer output ###
+test-output/
