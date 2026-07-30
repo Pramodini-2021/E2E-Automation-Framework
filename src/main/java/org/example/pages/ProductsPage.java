@@ -1,13 +1,14 @@
 package org.example.pages;
 
+import org.example.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class ProductsPage {
 
     private WebDriver driver;
+    private WaitUtils waitUtils;
 
-    // Locators
     private By pageTitle = By.className("title");
     private By addToCartBackpack = By.id("add-to-cart-sauce-labs-backpack");
     private By shoppingCartIcon = By.className("shopping_cart_link");
@@ -15,22 +16,22 @@ public class ProductsPage {
 
     public ProductsPage(WebDriver driver) {
         this.driver = driver;
+        this.waitUtils = new WaitUtils(driver);
     }
 
-    // Actions
     public boolean isPageDisplayed() {
-        return driver.findElement(pageTitle).isDisplayed();
+        return waitUtils.waitForVisibility(pageTitle).isDisplayed();
     }
 
     public void addBackpackToCart() {
-        driver.findElement(addToCartBackpack).click();
+        waitUtils.waitForClickable(addToCartBackpack).click();
     }
 
     public void goToCart() {
-        driver.findElement(shoppingCartIcon).click();
+        waitUtils.waitForClickable(shoppingCartIcon).click();
     }
 
     public String getCartItemCount() {
-        return driver.findElement(shoppingCartBadge).getText();
+        return waitUtils.waitForVisibility(shoppingCartBadge).getText();
     }
 }
