@@ -1,13 +1,14 @@
 package org.example.pages;
 
+import org.example.utils.WaitUtils;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public class CheckoutPage {
 
     private WebDriver driver;
+    private WaitUtils waitUtils;
 
-    // Locators
     private By firstNameField = By.id("first-name");
     private By lastNameField = By.id("last-name");
     private By postalCodeField = By.id("postal-code");
@@ -17,24 +18,24 @@ public class CheckoutPage {
 
     public CheckoutPage(WebDriver driver) {
         this.driver = driver;
+        this.waitUtils = new WaitUtils(driver);
     }
 
-    // Actions
     public void enterShippingInfo(String firstName, String lastName, String postalCode) {
-        driver.findElement(firstNameField).sendKeys(firstName);
+        waitUtils.waitForVisibility(firstNameField).sendKeys(firstName);
         driver.findElement(lastNameField).sendKeys(lastName);
         driver.findElement(postalCodeField).sendKeys(postalCode);
     }
 
     public void clickContinue() {
-        driver.findElement(continueButton).click();
+        waitUtils.waitForClickable(continueButton).click();
     }
 
     public void clickFinish() {
-        driver.findElement(finishButton).click();
+        waitUtils.waitForClickable(finishButton).click();
     }
 
     public String getConfirmationMessage() {
-        return driver.findElement(confirmationMessage).getText();
+        return waitUtils.waitForVisibility(confirmationMessage).getText();
     }
 }
