@@ -13,14 +13,15 @@ public class DriverFactory {
         if (browser.equalsIgnoreCase("chrome")) {
             WebDriverManager.chromedriver().setup();
             ChromeOptions options = new ChromeOptions();
-            options.addArguments("--start-maximized");
 
-            // Detect if running inside GitHub Actions (or any CI system)
             boolean isCI = System.getenv("CI") != null;
             if (isCI) {
                 options.addArguments("--headless=new");
                 options.addArguments("--no-sandbox");
                 options.addArguments("--disable-dev-shm-usage");
+                options.addArguments("--window-size=1920,1080");
+            } else {
+                options.addArguments("--start-maximized");
             }
 
             driver.set(new ChromeDriver(options));
