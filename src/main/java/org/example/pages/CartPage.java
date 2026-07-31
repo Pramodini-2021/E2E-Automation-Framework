@@ -22,6 +22,6 @@ public class CartPage {
     }
 
     public void clickCheckout() {
-        waitUtils.waitForClickable(checkoutButton).click();
+        waitUtils.jsClick(checkoutButton);
     }
 }
