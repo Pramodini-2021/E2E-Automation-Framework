@@ -41,7 +41,6 @@ public class WaitUtils {
         throw new RuntimeException("Element remained stale after 3 attempts: " + locator);
     }
 
-    // Forces a click using JavaScript - more reliable for icon/link elements in headless CI
     public void jsClick(By locator) {
         WebElement element = waitForVisibility(locator);
         JavascriptExecutor js = (JavascriptExecutor) driver;
@@ -57,6 +56,5 @@ public class WaitUtils {
                         "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));",
                 element, text
         );
-    }
     }
 }
