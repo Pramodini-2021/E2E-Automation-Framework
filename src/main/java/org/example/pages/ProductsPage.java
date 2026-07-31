@@ -28,7 +28,7 @@ public class ProductsPage {
     }
 
     public void goToCart() {
-        waitUtils.waitForClickable(shoppingCartIcon).click();
+        waitUtils.jsClick(shoppingCartIcon);
     }
 
     public String getCartItemCount() {

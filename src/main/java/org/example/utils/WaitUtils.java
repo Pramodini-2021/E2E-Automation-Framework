@@ -1,6 +1,7 @@
 package org.example.utils;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -27,17 +28,23 @@ public class WaitUtils {
         return wait.until(ExpectedConditions.elementToBeClickable(locator));
     }
 
-    // Retries a click up to 3 times if the element goes "stale" mid-action
     public void safeClick(By locator) {
         int attempts = 0;
         while (attempts < 3) {
             try {
                 waitForClickable(locator).click();
-                return; // success, exit the method
+                return;
             } catch (StaleElementReferenceException e) {
                 attempts++;
             }
         }
         throw new RuntimeException("Element remained stale after 3 attempts: " + locator);
+    }
+
+    // Forces a click using JavaScript - more reliable for icon/link elements in headless CI
+    public void jsClick(By locator) {
+        WebElement element = waitForVisibility(locator);
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", element);
     }
 }
