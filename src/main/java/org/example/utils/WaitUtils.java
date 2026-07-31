@@ -52,10 +52,11 @@ public class WaitUtils {
         WebElement element = waitForVisibility(locator);
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript(
-                "arguments[0].value = arguments[1];" +
-                        "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));" +
-                        "arguments[0].dispatchEvent(new Event('change', { bubbles: true }));",
+                "var nativeInputValueSetter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, 'value').set;" +
+                        "nativeInputValueSetter.call(arguments[0], arguments[1]);" +
+                        "arguments[0].dispatchEvent(new Event('input', { bubbles: true }));",
                 element, text
         );
+    }
     }
 }
