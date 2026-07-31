@@ -22,9 +22,9 @@ public class CheckoutPage {
     }
 
     public void enterShippingInfo(String firstName, String lastName, String postalCode) {
-        waitUtils.waitForVisibility(firstNameField).sendKeys(firstName);
-        driver.findElement(lastNameField).sendKeys(lastName);
-        driver.findElement(postalCodeField).sendKeys(postalCode);
+        waitUtils.jsType(firstNameField, firstName);
+        waitUtils.jsType(lastNameField, lastName);
+        waitUtils.jsType(postalCodeField, postalCode);
     }
 
     public void clickContinue() {
