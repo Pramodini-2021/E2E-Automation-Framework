@@ -28,11 +28,11 @@ public class CheckoutPage {
     }
 
     public void clickContinue() {
-        waitUtils.waitForClickable(continueButton).click();
+        waitUtils.jsClick(continueButton);
     }
 
     public void clickFinish() {
-        waitUtils.waitForClickable(finishButton).click();
+        waitUtils.jsClick(finishButton);
     }
 
     public String getConfirmationMessage() {
