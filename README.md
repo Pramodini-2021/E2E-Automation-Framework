@@ -28,16 +28,24 @@ A Selenium + Java + TestNG test automation framework built using the Page Object
 
 **Headless CI execution** — Chrome runs headless with an explicit window size when executed in GitHub Actions, since headless mode doesn't support `--start-maximized`. Locally, tests run in a normal visible browser window.
 
+
 ## Project Structure
 
-src
-├── main/java/org/example
-│   ├── base        → BaseTest (setup/teardown, reporting hooks)
-│   ├── pages        → Page Object classes
-│   └── utils        → DriverFactory, WaitUtils, ConfigReader, ExtentManager
-└── test/java/org/example
-    └── tests        → Test classes (Login, Cart, Checkout)
-
+```
+E2E-Automation-Framework/
+├── src/
+│   ├── main/java/
+│   │   ├── pages/
+│   │   ├── utils/
+│   │   └── config/
+│   └── test/java/
+│       ├── tests/
+│       └── listeners/
+├── .github/workflows/
+│   └── ci.yml
+├── pom.xml
+└── README.md
+```
 
 ## How to Run Locally
 
